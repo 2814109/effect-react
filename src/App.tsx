@@ -7,14 +7,32 @@ import { Effect, Console } from "effect";
 function App() {
   const [count, setCount] = useState(0);
 
-  const program1 = Console.log("Hello, World!");
-  Effect.runSync(program1);
+  // const program1 = Console.log("Hello, World!");
+  // Effect.runSync(program1);
 
-  const program2 = Effect.sync(() => {
-    console.log("Hello, World! sync"); // side effect
-    return 42; // return value
-  });
-  console.log(program2);
+  // const program2 = Effect.sync(() => {
+  //   console.log("Hello, World! sync"); // side effect
+  //   return 42; // return value
+  // });
+  // console.log(program2);
+
+  const program3 = Effect.promise<string>(
+    () =>
+      new Promise((resolve) => {
+        setTimeout(() => {
+          resolve("Async operation completed successfully!");
+        }, 4000);
+      })
+  );
+
+  // console.log(program3);
+
+  const program4 = Effect.tryPromise(() =>
+    fetch("https://jsonplaceholder.typicode.com/todos/1")
+  );
+
+  console.log(program4);
+
   return (
     <>
       <div>
