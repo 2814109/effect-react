@@ -7,9 +7,14 @@ import { Effect, Console } from "effect";
 function App() {
   const [count, setCount] = useState(0);
 
-  const program = Console.log("Hello, World!");
-  Effect.runSync(program);
+  const program1 = Console.log("Hello, World!");
+  Effect.runSync(program1);
 
+  const program2 = Effect.sync(() => {
+    console.log("Hello, World! sync"); // side effect
+    return 42; // return value
+  });
+  console.log(program2);
   return (
     <>
       <div>
